@@ -6,6 +6,6 @@ if [ -z "$EDGE" ]; then
 else
   apt-get install -qy git
   rm -rf /opt/sickrage
-  git clone https://github.com/echel0n/SickRage /opt/sickrage
+  git clone https://github.com/SickragePVR/SickRage.git /opt/sickrage
   chown -R nobody:users /opt/sickrage
 fi

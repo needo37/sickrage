@@ -19,10 +19,10 @@ RUN apt-get update -q
 # Install Dependencies
 RUN apt-get install -qy python python-cheetah ca-certificates wget unrar
 
-# Install SickRage 3a70a6effe (2014-06-22)
+# Install SickRage 0.2.1 (2014-10-22)
 RUN mkdir /opt/sickrage
-RUN wget https://github.com/echel0n/SickRage/tarball/3a70a6effe305a867d36549919f19c8866152449 -O /tmp/echel0n-SickRage-3a70a6e.tar.gz
-RUN tar -C /opt/sickrage -xvf /tmp/echel0n-SickRage-3a70a6e.tar.gz --strip-components 1
+RUN wget https://github.com/SickragePVR/SickRage/archive/release_0.2.1.tar.gz -O /tmp/release_0.2.1.tar.gz
+RUN tar -C /opt/sickrage -xvf /tmp/release_0.2.1.tar.gz --strip-components 1
 RUN chown nobody:users /opt/sickrage
 
 EXPOSE 8081
