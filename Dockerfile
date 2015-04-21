@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.11
+FROM phusion/baseimage:0.9.16
 MAINTAINER needo <needo@superhero.org>
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -9,21 +9,31 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Fix a Debianism of the nobody's uid being 65534
-RUN usermod -u 99 nobody
-RUN usermod -g 100 nobody
+RUN usermod -u 99 nobody && \
+usermod -g 100 nobody && \
 
-RUN add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse"
-RUN add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse"
-RUN apt-get update -q
+add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty universe multiverse" && \
+add-apt-repository "deb http://us.archive.ubuntu.com/ubuntu/ trusty-updates universe multiverse" && \
+apt-get update -q && \
 
 # Install Dependencies
-RUN apt-get install -qy python python-cheetah ca-certificates wget unrar
+apt-get install -qy python python-cheetah ca-certificates wget unrar unzip && \
 
 # Install SickRage 0.2.1 (2014-10-22)
-RUN mkdir /opt/sickrage
-RUN wget https://github.com/SICKRAGETV/SickRage/archive/release_4.0.9.tar.gz -O /tmp/release_4.0.9.tar.gz
-RUN tar -C /opt/sickrage -xvf /tmp/release_4.0.9.tar.gz --strip-components 1
-RUN chown nobody:users /opt/sickrage
+mkdir /opt/sickrage && \
+cd /tmp && \
+wget https://github.com/SiCKRAGETV/SickRage/archive/v4.0.9.zip && \
+unzip v4.0.9.zip && \
+mv SickRage-4.0.9/* /opt/sickrage/ && \
+chown -R nobody:users /opt/sickrage && \
+
+# clean up
+apt-get clean && \
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+/usr/share/man /usr/share/groff /usr/share/info \
+/usr/share/lintian /usr/share/linda /var/cache/man && \
+(( find /usr/share/doc -depth -type f ! -name copyright|xargs rm || true )) && \
+(( find /usr/share/doc -empty|xargs rmdir || true ))
 
 EXPOSE 8081
 
