@@ -19,12 +19,12 @@ apt-get update -q && \
 # Install Dependencies
 apt-get install -qy python python-cheetah ca-certificates wget unrar unzip && \
 
-# Install SickRage 0.2.1 (2014-10-22)
+# Install SickRage 4.2.0.4 (2015-11-22)
 mkdir /opt/sickrage && \
 cd /tmp && \
-wget https://github.com/SiCKRAGETV/SickRage/archive/v4.0.9.zip && \
-unzip v4.0.9.zip && \
-mv SickRage-4.0.9/* /opt/sickrage/ && \
+wget https://github.com/SickRage/SickRage/archive/v4.2.0.4.zip && \
+unzip v4.2.0.4.zip && \
+mv SickRage-4.2.0.4/* /opt/sickrage/ && \
 chown -R nobody:users /opt/sickrage && \
 
 # clean up
