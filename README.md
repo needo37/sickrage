@@ -1,4 +1,4 @@
-This is a Dockerfile setup for sickrage - https://www.sickrage.tv/forums/
+This is a Dockerfile setup for sickrage - https://sickrage.github.io/
 
 To run:
 
